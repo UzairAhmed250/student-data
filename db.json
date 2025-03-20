@@ -7,100 +7,22 @@
       "phone": "+92342775699"
     },
     {
-      "id": "1",
-      "name": "1",
-      "place": "1",
-      "phone": "1"
+      "id": "2",
+      "name": "riyan",
+      "phone": "09876543",
+      "place": "karachi"
     },
     {
-      "id": "1",
-      "name": "1",
-      "place": "1",
-      "phone": "1"
+      "id": "3",
+      "name": "hashim",
+      "phone": "09876545",
+      "place": "larkana"
     },
     {
-      "id": "1",
-      "name": "1",
-      "place": "1",
-      "phone": "1"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "place": "karachi",
-      "phone": "02344"
-    },
-    {
-      "id": "",
-      "name": "",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "",
-      "name": "",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "1",
-      "name": "",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "1",
-      "name": "",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "",
-      "place": ""
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "",
-      "place": "sad"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "",
-      "place": "sad"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "0317-0807563",
-      "place": "sad"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "0317-0807563",
-      "place": "sad"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "0317-0807563",
-      "place": "sad"
-    },
-    {
-      "id": "1",
-      "name": "uzair",
-      "phone": "0317-0807563",
-      "place": "sad"
+      "id": "4",
+      "name": "syayr",
+      "phone": "09876543",
+      "place": "khdam"
     }
   ]
 }

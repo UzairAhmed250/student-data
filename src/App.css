@@ -151,3 +151,10 @@ th, td{
 .form-group label{
   font-weight: 600;
 }
+
+.error{
+  color: red;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: italic;
+}
