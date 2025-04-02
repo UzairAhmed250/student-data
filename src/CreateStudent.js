@@ -19,11 +19,16 @@ function CreateStudent() {
     }
 
     const [userValue,setUserValue] = useState({
-        id: uuidv4(),
+        id: "",
         name:"",
         phone:"",
         place:""
     })
+
+    // if( userValue.id==""){
+    //     const id = userValue.id;
+    //     ++id;
+    // }
     
     const handleFormChane = (e)=>{
         
@@ -40,7 +45,10 @@ function CreateStudent() {
         console.log(userValue);
         fetch("http://localhost:8000/students",{
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: 
+            { 
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(userValue)
         })
         .then((res)=>
@@ -96,7 +104,7 @@ function CreateStudent() {
             <form onSubmit={handleSubmit} className="form-fields" >
             <div className='form-group'>
                     <label htmlFor="id">Id: </label>
-                    <input type="text" name="id" id="id" value={userValue.id} onChange={handleFormChane} className='form-control' disabled required/>
+                    <input type="text" name="id" id="id" value={userValue.id} onChange={handleFormChane} className='form-control' required/>
                 </div>
                 <div className='form-group'>
                     <label htmlFor="name">Student Name: </label>

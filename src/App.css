@@ -158,3 +158,15 @@ th, td{
   font-size: 14px;
   font-style: italic;
 }
+
+.details strong{
+  color: purple;
+}
+
+.details{
+  padding: 15px;
+}
+
+.details div {
+  padding: 5px 0 ;
+}
