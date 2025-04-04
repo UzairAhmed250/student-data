@@ -59,6 +59,12 @@
       "name": "dsaf",
       "phone": "0987614",
       "place": "sdfawgfdsa"
+    },
+    {
+      "id": "6",
+      "name": "Faraz",
+      "phone": "123456789",
+      "place": "Delhi"
     }
   ]
 }
