@@ -5,7 +5,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://student-data-10eea-default-rtdb.firebaseio.com",
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
 // Initialize Firebase
