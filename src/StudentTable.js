@@ -1,16 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import "./App.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { collection, getDocs } from 'firebase/firestore';
+import db from './configuration';
+
+// type Student = {
+//     id: Number;
+//     name: String;
+//     place: String;
+//     email: String;
+// };  
 
 function StudentTable() {
-    const [students, setStudents] = useState("")
+    // const [student, setStudent] = useState<Student>({
+    //     id: "",
+    //     name: "",
+    //     place: "",
+    //     email: "",
+    // })
+
+    const [students, setStudents] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8000/students")
-        .then((res)=>res.json())
-        .then((data)=>
-            setStudents(data)).catch((err)=>
-            console.log(err))
-    }, [])
+        const fetchStudents = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "students"));
+                const studentsList = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                setStudents(studentsList);
+                console.log("doc id: ",studentsList)
+                console.log("doc snapshot: ",querySnapshot)
+            } catch (err) {
+                console.error("Error fetching students:", err);
+            }
+        };
+
+        fetchStudents();
+    }, []);
     const router = useNavigate()
 
     const displayDetails = (id) => {
@@ -31,7 +58,9 @@ function StudentTable() {
         </div>
         <div className='table-container'>
             <Link to="/student/create" className='btn btn-add'>Add New Student</Link>
-            <table>
+            <table 
+                className='tableData'
+            >
                 <thead>
                     <tr>
                         <th>Student ID</th>
@@ -41,23 +70,24 @@ function StudentTable() {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                    <tbody>
-                        {
-                            students && students.map((item)=>(
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.place}</td>
-                                <td>{item.phone}</td>
-                                <td className='actions'>
-                                    <button onClick={() => displayDetails(item.id)} className='btn btn-info'> View </button>
-                                    <button onClick={() => editStudentDetail(item.id)} className='btn btn-primary'> Edit</button>
-                                    <a href="" className='btn btn-danger'> Delete</a>
+                {students.map((student) => (
+                <tbody 
+                    key={student.id}
+                >
+                    <tr>
+                    <td>{student.id}</td>
+                    <td>{student.name}</td>
+                    <td>{student.place}</td>
+                    <td>{student.phone}</td>
+                    <td className='actions'>
+                        <button onClick={() => displayDetails(student.id)} className='btn btn-info'> View </button>
+                        <button onClick={() => editStudentDetail(student.id)} className='btn btn-primary'> Edit</button>
+                        <a href="" className='btn btn-danger'> Delete</a>
                                 </td>
-                        </tr>
-                            ))
-                        }
-                    </tbody>
+                    </tr>
+                    {/* Add other student fields here */}
+                </tbody>
+            ))}
             </table>
         </div>
     </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import "./App.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import db from './configuration';
+import { addDoc, collection } from 'firebase/firestore';
 
 
 function CreateStudent() {
@@ -40,23 +42,31 @@ function CreateStudent() {
     }
     console.log(userValue);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(userValue);
-        fetch("http://localhost:8000/students",{
-            method: 'POST',
-            headers: 
-            { 
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userValue)
-        })
-        .then((res)=>
-        {
-            alert("Student Data Updated Successfully!");
-            navigate('/');
-        })
-        .catch((err)=>console.log(err))
+    console.log(userValue);
+
+    // const  fire = async()=>{
+
+    //     const docRef = await addDoc(collection(db, "students"), {
+    //       id: 1,
+    //       name: "Tokyo",
+    //       email: "abdd@gmail.com",
+    //       city: "Japan",
+    
+    //     });
+    //     console.log("Document written with parent: ", docRef.id);
+    //   }
+    //   fire();
+
+    try {
+        await addDoc(collection(db, "students"), 
+        userValue); 
+        alert("Student Data Added Successfully to Firestore!");
+        navigate('/');
+    } catch (error) {
+        console.error("Error adding document: ", error);
+    }
     }
 
     // async function getData(){

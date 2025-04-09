@@ -4,8 +4,13 @@ import StudentTable from './StudentTable';
 import CreateStudent from './CreateStudent';
 import EditStudent from './EditStudent';
 import ViewStudentDetails from './ViewStudentDetails';
+import { collection, addDoc } from "firebase/firestore"; 
+import db from "./configuration"
+
 
 function App() {
+
+
   return (
     <>
     <div className="App">

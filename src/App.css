@@ -16,6 +16,8 @@
   align-items: center;
   height: 100vh; */
   height: auto;
+  
+
 }
 
 .h2{
@@ -45,7 +47,6 @@
 .table-container{
   margin: 50px;
   border-radius: 10px;
- 
 }
 table{
   margin: 30px auto;
@@ -169,4 +170,14 @@ th, td{
 
 .details div {
   padding: 5px 0 ;
+}
+
+.tableData{
+  overflow-y: scroll;
+}
+
+.tableData{
+  position: relative;
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
