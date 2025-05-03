@@ -22,7 +22,7 @@ console.log("API KEY:", process.env.REACT_APP_API_KEY);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app,firebaseConfig)
+const db = getFirestore(app, process.env.REACT_APP_APP_ID)
 
 // const analytics = getAnalytics(app);
 
