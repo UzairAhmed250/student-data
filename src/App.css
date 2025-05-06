@@ -23,7 +23,6 @@
 .h2{
   text-align: center;
   color: purple;
-  /* margin: 10px; */
   font-size: 32px;
   font-weight: 600;
 }
@@ -53,11 +52,6 @@ table{
   width: 100%;
   border-collapse: collapse;
 }
-
-/* tr{
-  border-bottom: 1px solid red;
-  border-radius: 10px;
-} */
 
 tbody>tr{
   border-bottom: 1px solid #ddd;
@@ -137,7 +131,6 @@ th, td{
 .form-group-button{
   display: flex;
   gap: 10px;
-  /* flex-direction: column; */
   width: 100%;
 }
 

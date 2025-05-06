@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./App.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { collection, getDocs } from 'firebase/firestore';
-import db from './configuration';
+import { db, collection, getDocs } from './configuration';
 
 // type Student = {
 //     id: Number;

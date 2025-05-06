@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import { Link, useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import db from './configuration';
-import { addDoc, collection } from 'firebase/firestore';
+import  { addDoc, collection, db } from './configuration';
+
+
 
 
 function CreateStudent() {

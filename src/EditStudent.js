@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 function EditStudent() {
@@ -41,7 +41,6 @@ function EditStudent() {
         place: data.place,
         phone: data.phone
       })
-      // console.log(data.id);
       
     })
     .catch((err)=>console.log(err.message))

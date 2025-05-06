@@ -1,12 +1,10 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore ,query, orderBy, limit, getDocs} from "firebase/firestore";
-// import { getFirestore } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, addDoc, getDocs, doc } from "firebase/firestore"; 
+// import { getFirestore } from "firebase/firestore";
+// import { getDocs } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -20,17 +18,8 @@ const firebaseConfig = {
 
 console.log("API KEY:", process.env.REACT_APP_DATABASE_URL);
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
-// const q = query(db, orderBy("id"), limit(3));
 
-// const querySnapshot = await getDocs(q;
-// querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  // console.log(doc.id, " => ", doc.data());
-// });
-// const analytics = getAnalytics(app);
-
-export default db;
+export { db, collection, addDoc , getDocs, doc};
 

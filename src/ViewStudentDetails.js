@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { doc , getDoc} from "firebase/firestore";
-import db from './configuration';
+import { db, doc, getDocs } from './configuration';
 
 
 function ViewStudentDetails() {
@@ -10,7 +9,7 @@ function ViewStudentDetails() {
   
   const handleStudentDetail = async() => {
     const docRef = doc(db, studentid);
-    const docSnap = await getDoc(docRef);
+    const docSnap = await getDocs(docRef);
     console.log(docSnap, "mm")
 
     if (docRef.exist()) {
@@ -28,7 +27,7 @@ function ViewStudentDetails() {
     // .then((data)=>setStudentDetails(data))
     // .catch((err)=>console.log(err.message))
     handleStudentDetail()
-  },[])
+  },[handleStudentDetail()])
 
   console.log(studentDetails, "studentDetails" )
 
