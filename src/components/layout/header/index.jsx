@@ -10,7 +10,7 @@ function HeaderComponent() {
         </div>
         <div className="nav-buttons">
           <div>
-            <button><Link to={"/"}> Home </Link></button>
+            <button><Link to={"/studenttable"}> Home </Link></button>
           </div>
           <div>
             <button>Contact us</button>

@@ -98,6 +98,12 @@
   .checkbox-right a:hover {
     text-decoration: underline;
   }
+
+  .checkbox-right{
+    margin: 12px 0;
+    display: flex;
+    justify-content: center;
+  }
   
   
   /* Responsive Design */

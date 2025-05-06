@@ -1,31 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./style.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../configuration';
 
 function SignUpComponent() {
+  const navigate = useNavigate(); 
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cPassword: "",
+  })
+
+  const handleOnchange = (e) => {
+  setUser({
+    ...user,
+  [e.target.name]:e.target.value
+})
+  }
+
+
+
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault()
+    
+    if (user.password !== user.confirmPassword) {
+      alert("Your confirm password does not match the password.");
+      return;
+    }
+    await createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential)=> {
+        const user = userCredential.user;
+        console.log(user)
+        navigate("/") 
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+      });
+  }
+
   return (
     <div className="login-container">
       <form className="login-form">
         <h2>Sign Up</h2>
-
         <div className="form-group">
           <label htmlFor="name">Full Name:</label>
-          <input type="text" id="name" placeholder="Enter your name" required />
+          <input type="text" id="name" name='name' onChange={handleOnchange} value={user.name} placeholder="Enter your name" required />
         </div>
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
+          <input type="email" id="email" name='email' onChange={handleOnchange} value={user.email} placeholder="Enter your email" required />
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" placeholder="Enter your password" required />
+          <input type="password" id="password" name='password' onChange={handleOnchange} value={user.password} placeholder="Enter your password" required />
         </div>
 
         <div className="form-group">
           <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+          <input type="password" id="confirmPassword" name='cPassword' onChange={handleOnchange} value={user.cPassword} placeholder="Confirm your password" required />
         </div>
 
         <div className="checkbox-container">
@@ -38,7 +77,7 @@ function SignUpComponent() {
           </div>
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" onClick={handleSubmit}>Sign Up</button>
       </form>
     </div>
   );

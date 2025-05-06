@@ -18,10 +18,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
           <Routes>
-            <Route path="/" element={<StudentTable />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
-            <Route path="/ " element={<ForgetPassword />} />
+            <Route path="/studenttable" element={<StudentTable />} />
+            <Route path="/forgetpassword " element={<ForgetPassword />} />
             <Route path="/student/create" element={<CreateStudent />} />
             <Route path="/student/edit/:studentid" element={<EditStudent />} />
             <Route path="/student/view/:studentid" element={<ViewStudentDetails />} />

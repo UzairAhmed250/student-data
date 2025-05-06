@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./App.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { db, collection, getDocs } from './configuration';
+import { db, collection, getDocs, auth } from './configuration';
+import { onAuthStateChanged } from 'firebase/auth';
 
 // type Student = {
 //     id: Number;
@@ -38,6 +39,17 @@ function StudentTable() {
 
         fetchStudents();
     }, []);
+
+    useEffect(() =>{
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                const uid = user.uid;
+                console.log(uid)
+            } else {
+                console.log("user is logged out")
+            }
+        })  
+    }, [])
     const router = useNavigate()
 
     const displayDetails = (id) => {
