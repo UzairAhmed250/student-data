@@ -48,7 +48,7 @@ function CreateStudent() {
         await addDoc(collection(db, "students"), 
         userValue); 
         alert("Student Data Added Successfully to Firestore!");
-        navigate('/');
+        navigate('/studenttable');
     } catch (error) {
         console.error("Error adding document: ", error);
     }
