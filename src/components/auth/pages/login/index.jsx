@@ -51,7 +51,7 @@ function LoginComponent() {
       </div>
       <div className="checkbox-container">
   <div className="checkbox-left">
-    <input type="checkbox" id='checkbox' name='checkbox' />
+    <input type="checkbox" id='checkbox' name='checkbox' required />
     <p>Remember me</p>
   </div>
   <div className="checkbox-right">

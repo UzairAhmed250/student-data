@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { db, doc, getDocs } from './configuration';
+import { collection, db, doc, getDocs } from './configuration';
 
 
 function ViewStudentDetails() {
@@ -8,19 +8,21 @@ function ViewStudentDetails() {
   const [studentDetails, setStudentDetails] = useState({});
   
   const handleStudentDetail = async() => {
-    const docRef = doc(db, studentid);
-    const docSnap = await getDocs(docRef);
-    console.log(docSnap, "mm")
-
-    if (docRef.exist()) {
-      console.log("DD", docSnap.data());
-    } else{
-      console.log("no such document!")
-    }
-
-
-  }
-  
+                try {
+                    const querySnapshot = await getDocs(collection(db, "students",));
+                    const studentsList = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }));
+                    setStudentDetails(studentsList);
+                    console.log("doc ids: ",studentsList)
+                    console.log("doc snapshots: ",querySnapshot)
+                } catch (err) {
+                    console.error("Error fetching students:", err);
+              }
+            
+            }
+          
   useEffect(() =>{
         // fetch("http://localhost:8000/students/"+studentid)
     // .then((res)=>res.json())

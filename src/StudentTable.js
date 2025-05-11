@@ -28,6 +28,7 @@ function StudentTable() {
                 const studentsList = querySnapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
+                    // console:(studentsList, "querySnapshot")
                 }));
                 setStudents(studentsList);
                 console.log("doc id: ",studentsList)

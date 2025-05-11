@@ -44,21 +44,6 @@ function CreateStudent() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-    console.log(userValue);
-
-    // const  fire = async()=>{
-
-    //     const docRef = await addDoc(collection(db, "students"), {
-    //       id: 1,
-    //       name: "Tokyo",
-    //       email: "abdd@gmail.com",
-    //       city: "Japan",
-    
-    //     });
-    //     console.log("Document written with parent: ", docRef.id);
-    //   }
-    //   fire();
-
     try {
         await addDoc(collection(db, "students"), 
         userValue); 
@@ -70,8 +55,7 @@ function CreateStudent() {
     }
 
     // async function getData(){
-    //     const url = "http://localhost:8000/students";
-        
+    //     const url = "http://localhost:8000/students";   
     //     console.log(url, "url'");
     //     try {
     //         const response = await fetch(url,{
@@ -80,9 +64,7 @@ function CreateStudent() {
     //                 'Content-Type': 'application/json'
     //             },
     //             body: JSON.stringify({username: "name"}),
-
-    //         });
-            
+    //         });       
     //         if(!response.ok){
     //             throw new Error(`response status: ${response.status}`);
     //         }

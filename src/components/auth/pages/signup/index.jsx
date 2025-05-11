@@ -20,20 +20,21 @@ function SignUpComponent() {
 })
   }
 
+  console.log(user.password, user.cPassword, "hi")
 
 
 
   const handleSubmit = async(e) =>{
     e.preventDefault()
     
-    if (user.password !== user.confirmPassword) {
+    if (user.password !== user.cPassword) {
       alert("Your confirm password does not match the password.");
-      return;
+      // return;
     }
     await createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential)=> {
-        const user = userCredential.user;
-        console.log(user)
+        const registeredUser  = userCredential.user;
+        console.log(registeredUser )
         navigate("/") 
       })
       .catch((error) => {
