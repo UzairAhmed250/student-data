@@ -1,11 +1,20 @@
 import React from 'react'
-import Header from '../../../layout/header'
 import LoginComponent from '../../../components/auth/pages/login'
+import { auth } from "../../../configuration"
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
-  return (
+//  const navigate = useNavigate()
+//   const user = auth.currentUser;
+  
+//     if(!user){
+//       navigate("./");
+//     }
+//     else{
+//       navigate("/studenttable")
+//     }
+    return (
     <>
-        <Header />
         <LoginComponent />
     </>
   )

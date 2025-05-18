@@ -1,72 +1,95 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import {collection, db, getDocs} from "../configuration"
 
 function EditStudent() {
+    
+    const {studentid} = useParams()
+    
   const navigate = useNavigate();
-  const {studentid} = useParams()
+  const [loader, setLoader] = useState(false);
   const [validationError, setValidationError] = useState({
           name: false,
           place: false,
           phone: false
       });
 
-   const [userValue,setUserValue] = useState({
+  const [userValue,setUserValue] = useState({
           id: "",
           name:"",
           phone:"",
           place:""
       })
-      const validatoinErrorChange = (e) => {
+  const validatoinErrorChange = (e) => {
         setValidationError({
             ...validationError,
             [e.target.name]: true
         })
-    }
+      }
 
-    const handleFormChane = (e)=>{
+  const handleFormChane = (e)=>{
       setUserValue({
           ...userValue,
           [e.target.name]:e.target.value
       })
 
-  }
+      }
 
-  useEffect(() =>{
-    fetch("http://localhost:8000/students/"+studentid)
-    .then((res)=>res.json())
-    .then((data)=>{
-      setUserValue({
-        id: data.id,
-        name: data.name,
-        place: data.place,
-        phone: data.phone
-      })
+  // useEffect(() =>{
+  //   const handleEditStudent = async() => {
+  //     try{ 
+  //       setLoader(true);
+  //       const querySnapshot = await getDocs(collection,(db, "students"));
+  //       const studentData = querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //           ...doc.data()
+  //         })
+  //       )
+        
+        
+  //     } catch{
+        
+  //     } finally{
+        
+  //     }
+  //   }
       
-    })
-    .catch((err)=>console.log(err.message))
-  },[studentid])
+
+  //   // fetch("http://localhost:8000/students/"+studentid)
+  //   // .then((res)=>res.json())
+  //   // .then((data)=>{
+  //   //   setUserValue({
+  //   //     id: data.id,
+  //   //     name: data.name,
+  //   //     place: data.place,
+  //   //     phone: data.phone
+  //   //   })
+      
+  // //   })
+  // //   .catch((err)=>console.log(err.message))
+  // },[studentid])
 
 const handleSubmit = (e) => {
-  e.preventDefault();
-  fetch("http://localhost:8000/students/"+studentid,{
-      method: 'PUT',
-      headers: 
-      { 
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userValue)
-  })
-  .then((res) => {
-      if (!res.ok) {
-          throw new Error("Failed to update data");
-      }
-          return res.json();
-    })
-  .then(() => {
-          alert("Student Data Edited Successfully!");
-          navigate('/');
-          })
-  .catch((err)=>console.log(err))
+  // e.preventDefault();
+  // fetch("http://localhost:8000/students/"+studentid,{
+  //     method: 'PUT',
+  //     headers: 
+  //     { 
+  //         "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(userValue)
+  // })
+  // .then((res) => {
+  //     if (!res.ok) {
+  //         throw new Error("Failed to update data");
+  //     }
+  //         return res.json();
+  //   })
+  // .then(() => {
+  //         alert("Student Data Edited Successfully!");
+  //         navigate('/');
+  //         })
+  // .catch((err)=>console.log(err))
 }
 
 

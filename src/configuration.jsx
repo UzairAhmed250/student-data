@@ -1,10 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc } from "firebase/firestore"; 
-import { getAuth } from "firebase/auth";
-// import { getFirestore } from "firebase/firestore";
-// import { getDocs } from 'firebase/firestore';
-
-
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc, deleteDoc, deleteField ,updateDoc } from "firebase/firestore"; 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -17,11 +13,9 @@ const firebaseConfig = {
   databaseurl: process.env.REACT_APP_DATABASE_URL,
 };
 
-console.log("API KEY:", process.env.REACT_APP_DATABASE_URL);
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const auth = getAuth(app)
 
-export { db, collection, addDoc , getDocs, doc, auth, getDoc};
+export { db, collection, addDoc , getDocs, doc, auth, getDoc, deleteDoc, deleteField, updateDoc, onAuthStateChanged};
 

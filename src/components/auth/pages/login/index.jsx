@@ -4,7 +4,7 @@ import { Link , useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../../configuration';
 
-function LoginComponent() {
+function Login() {
   const navigate = useNavigate();
   const [users, setUsers] = useState({
     email: "",
@@ -18,10 +18,9 @@ function LoginComponent() {
     })
   }
 
-  console.log(users.name, "usersname")
-
-    const handleLoginSubmit = async(e) => {
-      e.preventDefault()
+  
+  const handleLoginSubmit = async(e) => {
+    e.preventDefault()
 
       await signInWithEmailAndPassword(auth, users.email, users.password)
       .then((userCredential) => {
@@ -67,4 +66,4 @@ function LoginComponent() {
   )
 }
 
-export default LoginComponent
+export default Login
