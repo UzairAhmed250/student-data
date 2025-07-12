@@ -13,8 +13,7 @@ function ViewStudentDetails() {
         setLoader(true)
           const querySnapshot = await getDocs(collection(db, "students",));
           const studentsList = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
+            id: doc.id, ...doc.data(),
           }));
           const matchedStudent = studentsList.find(student => student.id === studentid);
             setStudentDetails(matchedStudent);
@@ -44,7 +43,7 @@ function ViewStudentDetails() {
       : 
       ( 
         <div className='details'>
-          <div><strong>Student ID:</strong> <span>{studentDetails.id}</span></div>
+          <div><strong>Student RollNomber:</strong> <span>{studentDetails.id}</span></div>
           <div><strong>Student Name:</strong> <span>{studentDetails.name}</span></div>
           <div><strong>Place:</strong> <span>{studentDetails.place}</span></div>
           <div><strong>Phone:</strong> <span>{studentDetails.phone}</span></div>

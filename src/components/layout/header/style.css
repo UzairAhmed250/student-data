@@ -3,7 +3,7 @@
     background-color: rgba(128,0,128, 0.8);
     padding: 20px;
     border-bottom: 2px solid #ccc;
-    font-family: Arial, sans-serif;
+    font-family: 'Lora', serif;
   }
   
   .header-title {
@@ -11,6 +11,7 @@
     margin: 0;
     font-size: 24px;
     color: white;
+    font-weight: 700; /* Bold weight */
   }
   
   .nav-buttons {
@@ -29,7 +30,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease-in;
-    font-weight: 600;
+    font-weight: 500; /* Medium weight */
+    font-family: 'Lora', serif;
 }
   
   .nav-buttons button:hover {

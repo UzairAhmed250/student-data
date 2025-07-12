@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import {collection, db, getDocs} from "../configuration"
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+// import {collection, db, getDocs} from "../configuration"
 
 function EditStudent() {
     
-    const {studentid} = useParams()
+    // const {studentid} = useParams()
     
-  const navigate = useNavigate();
-  const [loader, setLoader] = useState(false);
+//   const navigate = useNavigate();
+//   const [loader, setLoader] = useState(false);
   const [validationError, setValidationError] = useState({
           name: false,
           place: false,
@@ -15,7 +15,7 @@ function EditStudent() {
       });
 
   const [userValue,setUserValue] = useState({
-          id: "",
+          rollNumber: "",
           name:"",
           phone:"",
           place:""
@@ -102,8 +102,8 @@ const handleSubmit = (e) => {
         <div className='form-container'>
             <form onSubmit={handleSubmit} className="form-fields" >
             <div className='form-group'>
-                    <label htmlFor="id">Id: </label>
-                    <input type="text" name="id" id="id" value={userValue.id} onChange={handleFormChane} className='form-control' required/>
+                    <label htmlFor="id">rollNumber: </label>
+                    <input type="text" name="id" id="rollNumber" value={userValue.rollNumber} onChange={handleFormChane} className='form-control' required/>
                 </div>
                 <div className='form-group'>
                     <label htmlFor="name">Student Name: </label>

@@ -47,19 +47,19 @@ function StudentTable() {
 
   const router = useNavigate();
 
-  const displayDetails = (id) => {
-    router("/student/view/" + id);
+  const displayDetails = (rollNumber) => {
+    router("/student/view/" + rollNumber);
   };
 
-  const editStudentDetail = (id) => {
-    router("/student/edit/" + id);
+  const editStudentDetail = (rollNumber) => {
+    router("/student/edit/" + rollNumber);
   };
 
-  const deleteStudentDetail = async (id) => {
+  const deleteStudentDetail = async (uid) => {
     try {
-      const studentDocRef = doc(db, "students", id);
+      const studentDocRef = doc(db, "students", uid);
       await deleteDoc(studentDocRef);
-      setStudents((prev) => prev.filter((student) => student.id !== id));
+      setStudents((prev) => prev.filter((student) => student.uid !== uid));
     } catch (err) {
       console.error("Error deleting student:", err);
     }
@@ -76,7 +76,7 @@ function StudentTable() {
           <table className="tableData">
             <thead>
               <tr>
-                <th>Student ID</th>
+                <th>Student RollNumber</th>
                 <th>Student Name</th>
                 <th>Place</th>
                 <th>Phone</th>
@@ -94,8 +94,8 @@ function StudentTable() {
                 </tr>
               ) : (
                 students.map((student) => (
-                  <tr key={student.id}>
-                    <td>{student.id}</td>
+                  <tr key={student.rollNumber}>
+                    <td>{student.rollNumber}</td>
                     <td>{student.name}</td>
                     <td>{student.place}</td>
                     <td>{student.phone}</td>
@@ -118,7 +118,6 @@ function StudentTable() {
                         onClick={() => deleteStudentDetail(student.id)}
                         className="btn btn-danger"
                       >
-                        {" "}
                         Delete
                       </button>
                     </td>
