@@ -8,6 +8,7 @@ import Login from "./(auth)/pages/login";
 import Signup from "./(auth)/pages/signup";
 import ForgetPassword from "./components/auth/pages/forgetpassword";
 import AuthLayout from "./components/layout/AuthLayout";
+import ProtectedLayout from "./components/layout/protectedLayout"
 
 function App() {
   const router = createBrowserRouter([
@@ -24,12 +25,19 @@ function App() {
           element: <Signup />,
         },
         {
-          path: "/studenttable",
-          element: <StudentTable />,
-        },
-        {
           path: "/forgetPassword",
           element: <ForgetPassword />,
+        }
+      ],
+    },
+
+    {
+      path: "/",
+      element: <ProtectedLayout />,
+      children: [
+        {
+          path: "/studenttable",
+          element: <StudentTable />,
         },
         {
           path: "/student/create",
@@ -43,9 +51,11 @@ function App() {
           path: "/student/view/:studentid",
           element: <ViewStudentDetails />,
         },
-      ],
-    },
+      ]
+    }
   ]);
+
+
 
   return <RouterProvider router={router} />;
 }

@@ -5,7 +5,7 @@
 }
 
 .container{
-  margin: 20px 300px;
+  margin: 20px auto;
   padding: 15px 0;
   border-radius: 10px;
   box-shadow: 1px 2px 5px #888888;
@@ -16,6 +16,7 @@
   align-items: center;
   height: 100vh; */
   height: auto;
+  max-width: 1440px;
   
 
 }
