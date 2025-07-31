@@ -58,7 +58,7 @@ function Login() {
   </div>
 </div>
           <div className="checkbox-right">
-            <span>Don't have an account? <Link to="/Signup">Create New Account</Link></span>
+            <span>Don't have an account? <Link to="/signup">Create New Account</Link></span>
           </div>
       <button type="submit" onClick={handleLoginSubmit}>Login</button>
     </form>

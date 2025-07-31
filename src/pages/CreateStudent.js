@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
-import { addDoc, collection, db } from "../configuration";
+import { addDoc, collection, db, query, where, getDocs } from "../configuration";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateStudent() {
   const [docId, setDocId] = useState([]);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-
-
 
   const [userValue, setUserValue] = useState({
     rollNumber: "",
@@ -23,6 +23,9 @@ function CreateStudent() {
     place: false,
     phone: false,
   });
+
+  const [rollNumberExists, setRollNumberExists] = useState(false);
+
   const validatoinErrorChange = (e) => {
     setValidationError({
       ...validationError,
@@ -35,34 +38,51 @@ function CreateStudent() {
       ...userValue,
       [e.target.name]: e.target.value,
     });
+    
+    // Clear roll number error when user starts typing
+    if (e.target.name === 'rollNumber') {
+      setRollNumberExists(false);
+    }
   };
-//   let num;
 
-//   console.log(num)
+  const checkRollNumberExists = async (rollNumber) => {
+    try {
+      const q = query(collection(db, "students"), where("rollNumber", "==", rollNumber));
+      const querySnapshot = await getDocs(q);
+      return !querySnapshot.empty; 
+    } catch (error) {
+      console.error("Error checking roll number:", error);
+      return false;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
+    
     try {
+      const rollExists = await checkRollNumberExists(userValue.rollNumber);
+      
+      if (rollExists) {
+        setRollNumberExists(true);
+        toast.error("Roll number already exists! Please use a different roll number.");
+        setLoader(false);
+        return;
+      }
+
       const addedstudent = await addDoc(collection(db, "students"), userValue);
       setDocId(addedstudent.id);
-      console.log(addedstudent.id);
-      alert("Student Data Added Successfully to Firestore!");
-    const num1 = {...userValue, rollNumber: userValue.rollNumber +1}
-        // let num = num1
-      navigate("/studenttable");
+      toast.success("Student Data Added Successfully to Firestore!", {
+        onClose: () => navigate("/studenttable"),
+        autoClose: 1500,
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
+      toast.error("Failed to add student. Please try again.");
     } finally {
       setLoader(false);
     }
   };
-//   userValue.map((user) => {
-//     user.rollNumber
-//   })
-//    console.log(num) 
-
-
 
   return (
     <div className="container">
@@ -80,6 +100,9 @@ function CreateStudent() {
               className="form-control"
               required
             />
+            {rollNumberExists && (
+              <span className="error">* Roll number already exists</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="name">Student Name: </label>
@@ -130,13 +153,18 @@ function CreateStudent() {
             )}
           </div>
           <div className="form-group form-group-button">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" style={{
+              width: "150px",
+              alignItems: "center",
+              padding: "14px 25px "
+            }}>
               {loader ? "adding..." : "Add Student"}
             </button>
-            <Link to={"/"} className="btn btn-danger">
+            <Link to={"/studenttable"} className="btn btn-danger">
               Back
             </Link>
           </div>
+          <ToastContainer />
         </form>
       </div>
     </div>

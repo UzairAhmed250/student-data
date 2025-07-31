@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./style.css";
+import "./signup.css";
 import { Link, useNavigate  } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../../configuration';
@@ -45,7 +45,7 @@ function SignUpComponent() {
   }
 
   return (
-    <div className="login-container">
+    <div className="signup-container" >
       <form className="login-form">
         <h2>Sign Up</h2>
         <div className="form-group">
@@ -74,7 +74,7 @@ function SignUpComponent() {
             <p>I agree to the <Link to="/terms">Terms & Conditions</Link></p>
           </div>
           <div className="checkbox-right">
-            <Link to="/login">Already have an account?</Link>
+            <Link to="/">Already have an account?</Link>
           </div>
         </div>
 

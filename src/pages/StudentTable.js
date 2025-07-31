@@ -59,7 +59,8 @@ function StudentTable() {
     try {
       const studentDocRef = doc(db, "students", uid);
       await deleteDoc(studentDocRef);
-      setStudents((prev) => prev.filter((student) => student.uid !== uid));
+      setStudents((prev) => prev.filter((student) => student.id !== uid));
+      
     } catch (err) {
       console.error("Error deleting student:", err);
     }
