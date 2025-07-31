@@ -42,10 +42,10 @@ const Sider = () => {
     <div
       style={{
         width: siderWidth,
-        background: "purple",
+        // background: "purple",
         transition: "width 0.3s ease",
         height: "100vh",
-        overflow: "hidden",
+        // overflow: "hidden",
       }}
     >
       <div
@@ -55,7 +55,7 @@ const Sider = () => {
           alignItems: "center",
           height: 64,
           background: "white",
-          transition: "all 0.3s ease",
+          // transition: "all 0.3s ease",
           padding: "0px 12px",
         }}
       >
@@ -74,9 +74,10 @@ const Sider = () => {
         </p>
         )}
         <Button
-          type="primary"
+          type="text"
+          color="purple"
           onClick={toggleCollapsed}
-          style={{ marginBottom: 0, transition: "all 0.3s ease"}}
+          style={{ marginBottom: 0, transition: "all 0.3s ease", color: "purple", border: "1px solid purple"}}
         >
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
@@ -85,11 +86,11 @@ const Sider = () => {
         mode="inline"
         theme="light"
         inlineCollapsed={collapsed}
-        style={{height: "calc(100vh - 64px)" ,height: "100vh", padding: 0, margin: 0 }}
+        style={{height: "calc(100vh - 64px)" , padding: 0, margin: 0 }}
       >
         {items.map((item, idx) => (
           <React.Fragment key={item.key}>
-            <Menu.Item key={item.key} icon={item.icon}>
+            <Menu.Item key={item.key} icon={item.icon} style={{color: "purple"}}>
               {item.label}
             </Menu.Item>
             {idx !== items.length - 1 && (
