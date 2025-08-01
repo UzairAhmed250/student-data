@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   border: border-box;
+  font-family: 'lora', serif, sans-serif ;
 }
 
 .container{
@@ -10,12 +11,11 @@
   border-radius: 10px;
   box-shadow: 1px 2px 5px #888888;
   border-top: 5px solid purple;
-  height: auto;
-  /* max-width: 1675px; */
+  height: 100vh;
+  max-width: 1675px;
   transition: all 0.1ms ease-in-out;
   width: 100%;
-  
-
+  color: purple;
 }
 
 .h2{
