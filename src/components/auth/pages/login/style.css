@@ -1,20 +1,16 @@
-/* LoginForm.css */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 250px);
     background-color: #eef1f5;
-    padding-top: 50px;
-    margin: auto ;
-    height: calc(100vh - 100%);
+    /* margin: auto ; */
   }
   
   .login-form {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     filter: drop-shadow(1px 2px 4px rgb(128,0,128));
     width: 100%;
     max-width: 400px;

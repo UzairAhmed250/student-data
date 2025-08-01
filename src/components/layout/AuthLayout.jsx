@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <div>
       <HeaderComponent />
-      <Outlet />
+        <Outlet />
       <FooterComponent />
     </div>
   )
