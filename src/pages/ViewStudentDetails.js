@@ -15,7 +15,7 @@ function ViewStudentDetails() {
           const studentsList = querySnapshot.docs.map((doc) => ({
             id: doc.id, ...doc.data(),
           }));
-          const matchedStudent = studentsList.find(student => student.id === studentid);
+          const matchedStudent = studentsList.find(student => student.rollNumber === studentid);
             setStudentDetails(matchedStudent);
       } catch (err) {
         } finally{
@@ -33,20 +33,23 @@ function ViewStudentDetails() {
         <div className='h2'>
             Student Details
         </div>                      
-      {studentDetails && loader ? (
+      {loader ? (
         <div className='details'>
           <div className="spinner-border" role="status">
             <span className="ssr-only">loading... </span>
           </div>
         </div>
       ) 
-      : 
-      ( 
+      : studentDetails ? (
         <div className='details'>
-          <div><strong>Student RollNomber:</strong> <span>{studentDetails.id}</span></div>
+          <div><strong>Student RollNumber:</strong> <span>{studentDetails.rollNumber}</span></div>
           <div><strong>Student Name:</strong> <span>{studentDetails.name}</span></div>
           <div><strong>Place:</strong> <span>{studentDetails.place}</span></div>
           <div><strong>Phone:</strong> <span>{studentDetails.phone}</span></div>
+        </div>
+      ) : (
+        <div className='details'>
+          <p>Student not found</p>
         </div>
       )
       }      
