@@ -102,14 +102,14 @@ function StudentTable() {
                     <td>{student.phone}</td>
                     <td className="actions">
                       <button
-                        onClick={() => displayDetails(student.id)}
+                        onClick={() => displayDetails(student.rollNumber)}
                         className="btn btn-info"
                       >
                         {" "}
                         View{" "}
                       </button>
                       <button
-                        onClick={() => editStudentDetail(student.id)}
+                        onClick={() => editStudentDetail(student.rollNumber)}
                         className="btn btn-primary"
                       >
                         {" "}

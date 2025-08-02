@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { addDoc, collection, db, query, where, getDocs } from "../configuration";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "../components/customComponent/button";
 
 function CreateStudent() {
   const [docId, setDocId] = useState([]);
@@ -153,13 +154,11 @@ function CreateStudent() {
             )}
           </div>
           <div className="form-group form-group-button">
-            <button type="submit" className="btn btn-primary" style={{
-              width: "150px",
-              alignItems: "center",
-              padding: "14px 25px "
-            }}>
-              {loader ? "adding..." : "Add Student"}
-            </button>
+            <Button
+              children={loader ? "adding..." :  "Add Student"}
+              className="btn btn-primary "
+              type="submit"
+            />
             <Link to={"/studenttable"} className="btn btn-danger">
               Back
             </Link>
