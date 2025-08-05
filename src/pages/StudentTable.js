@@ -34,16 +34,16 @@ function StudentTable() {
     fetchStudents();
   }, []);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log(uid);
-      } else {
-        console.log("user is logged out");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const uid = user.uid;
+  //       console.log(uid);
+  //     } else {
+  //       console.log("user is logged out");
+  //     }
+  //   });
+  // }, []);
 
   const router = useNavigate();
 

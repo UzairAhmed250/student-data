@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import "./signup.css";
 import { Link, useNavigate  } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../configuration';
+// import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth, sendEmailVerification, createUserWithEmailAndPassword } from '../../../../configuration';
 import { toast, ToastContainer } from 'react-toastify';
 
 function SignUpComponent() {
@@ -47,21 +47,31 @@ function SignUpComponent() {
       toast.error("Please agree to the Terms & Conditions.")
       return;
     }
-    await createUserWithEmailAndPassword(auth, user.email, user.password)
-      .then((userCredential)=> {
-        const registeredUser  = userCredential.user;
-        console.log(registeredUser )
-        navigate("/") 
-      })
-      .catch((error) => {
-        if(error){
-          toast.error(error.code)
-        }
-        const errorCode = error.code;
-        const errorMessage = error?.message
-        console.log(errorCode, "errorCode", errorMessage, "errorMessage")
-      });
+try {
+  const userCred = await createUserWithEmailAndPassword(auth, user.email, user.password)
+  const registeredUser = userCred.user;
+  console.log(registeredUser)
+  await sendEmailVerification(registeredUser, {
+    url: "https://student-data-omega.vercel.app/",
+    handleCodeInApp: false,
+  });
+  toast.success("Email Verification sent!")
+} catch (error) {
+  if(error){
+    toast.error(error.code)
   }
+  const errorCode = error.code;
+  const errorMessage = error?.message
+  console.log(errorCode, "errorCode", errorMessage, "errorMessage")
+  
+}
+}
+      // .then((userCredential)=> {
+      //   const registeredUser  = userCredential.user;
+      //   console.log(registeredUser )
+      //   navigate("/") 
+      // })
+      // toast.success("Verification Email Sent Successfully!")
 
   return (
     <div className="signup-container" >
