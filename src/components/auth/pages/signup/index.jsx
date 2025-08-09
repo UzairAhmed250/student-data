@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./signup.css";
 import { Link, useNavigate  } from 'react-router-dom';
 // import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { auth, sendEmailVerification, createUserWithEmailAndPassword } from '../../../../configuration';
+import { auth, sendEmailVerification, createUserWithEmailAndPassword, updateProfile, db, addDoc, collection } from '../../../../configuration';
 import { toast, ToastContainer } from 'react-toastify';
 
 function SignUpComponent() {
@@ -13,10 +13,6 @@ function SignUpComponent() {
     cPassword: "",
     isChecked: false
   })
-  // const [isChecked, setIsChecked] = useState(false)
-
-  const navigate = useNavigate(); 
-
   
   const handleChecked = (e) => {
     setUser({
@@ -32,10 +28,6 @@ function SignUpComponent() {
 })
   }
 
-  console.log(user.password, user.cPassword, "hi")
-
-
-
   const handleSubmit = async(e) =>{
     e.preventDefault()
     
@@ -50,11 +42,22 @@ function SignUpComponent() {
 try {
   const userCred = await createUserWithEmailAndPassword(auth, user.email, user.password)
   const registeredUser = userCred.user;
-  console.log(registeredUser)
+  
+  await updateProfile(auth.currentUser, {
+    displayName: user.name
+  })
+
   await sendEmailVerification(registeredUser, {
     url: "https://student-data-omega.vercel.app/",
     handleCodeInApp: false,
   });
+  const storeUsers = await addDoc(collection(db, "users"),{
+    name: user.name,
+    email: user.email,
+    uid: registeredUser.uid
+  })
+  
+  console.log(storeUsers)
   toast.success("Email Verification sent!")
 } catch (error) {
   if(error){
@@ -66,12 +69,6 @@ try {
   
 }
 }
-      // .then((userCredential)=> {
-      //   const registeredUser  = userCredential.user;
-      //   console.log(registeredUser )
-      //   navigate("/") 
-      // })
-      // toast.success("Verification Email Sent Successfully!")
 
   return (
     <div className="signup-container" >

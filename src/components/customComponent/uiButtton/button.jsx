@@ -1,11 +1,11 @@
 import React from 'react'
+import "./style.css"
 
 export default function Button({children, onClick, className, style}) {
   return (
-    <div>
-        <button onClick={onClick} className={className} style={style}>
+        <button onClick={onClick} className={ `custom-button  ${className}`} style={style}>
             {children}
         </button>
-    </div>
+    
   )
 }
