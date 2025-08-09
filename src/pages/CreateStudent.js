@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { addDoc, collection, db, query, where, getDocs } from "../configuration";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Button from "../components/customComponent/button";
+import Button from "../components/customComponent/uiButtton/button";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function CreateStudent() {
   const [docId, setDocId] = useState([]);
@@ -155,9 +156,13 @@ function CreateStudent() {
           </div>
           <div className="form-group form-group-button">
             <Button
-              children={loader ? "adding..." :  "Add Student"}
               className="btn btn-primary "
               type="submit"
+              children={
+                <>
+                  {loader && <LoadingOutlined style={{marginRight: 8}} />} Add Student
+                </>
+              }
             />
             <Link to={"/studenttable"} className="btn btn-danger">
               Back

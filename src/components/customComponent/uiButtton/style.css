@@ -1,0 +1,13 @@
+.custom-button{
+    background-color: rgba(128,0,128,0.9);
+    border: none;
+    padding: 15px 25px;
+    color: white !important;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: rgba(128,0,128,1)
+}

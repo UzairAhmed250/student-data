@@ -3,7 +3,8 @@ import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../configuration";
-import { LoadingOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
+import Button from "../../../customComponent/uiButtton/button";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ function Login() {
     isChecked: false,
   });
   const [isLoader, setIsLoader] = useState(false);
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+
+  const passwordType = isPasswordVisible ?  "text" : "password";
+    
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("rememberEmail");
@@ -90,10 +95,10 @@ function Login() {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{position: "relative"}}>
           <label htmlFor="password">Password:</label>
           <input
-            type="password"
+            type={passwordType}
             id="password"
             name="password"
             onChange={handleOnChange}
@@ -101,6 +106,22 @@ function Login() {
             placeholder="Enter your password"
             required
           />
+
+          { users.password.length > 0 && (<button 
+            type="button"
+            onClick={() => setPasswordVisible(!isPasswordVisible)} 
+            style={{
+                position: "absolute",
+                right: "10px",
+                top:"38px",
+                color: "purple",
+                cursor: "pointer",
+                fontSize:"16px",
+                border: "none"
+              }}
+            >
+            {isPasswordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+            </button>)}
         </div>
         <div className="checkbox-container">
           <div className="checkbox-left">
@@ -124,15 +145,17 @@ function Login() {
           </span>
         </div>
         <div style={{margin: "0 auto", width: "150px"}}>
-          <button 
-            type="submit" 
-            onClick={handleLoginSubmit} 
+          <Button
+            type="submit"
             style={{width: "100%", cursor: isLoader && "not-allowed" }}
             disabled={isLoader}
-            >
-            {isLoader && <LoadingOutlined style={{marginRight: 8 ,color: "purple"}} /> } 
-            Login
-          </button>
+            onClick={handleLoginSubmit} 
+            children={
+              <>
+                {isLoader && <LoadingOutlined style={{marginRight: 8 , fontSize: "17px"}} /> } Login
+              </>
+            }
+          />
         </div>
       </form>
     </div>

@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { auth, signOut } from '../../configuration';
 import { UserOutlined, LogoutOutlined, DownOutlined, LoadingOutlined } from '@ant-design/icons';
 import './style.css';
+import { useAuth } from '../../context/authContext';
 
 export default function ProtectedHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoader, setIsLoader] = useState(false)
   const navigate = useNavigate();
+  const {loading, user} = useAuth()
 
   const handleLogout = async () => {
     setIsLoader(true);
@@ -21,6 +23,8 @@ export default function ProtectedHeader() {
     }
   };
 
+
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -31,7 +35,9 @@ export default function ProtectedHeader() {
           <div className="user-dropdown">
             <button className="dropdown-toggle" onClick={toggleDropdown}>
               <UserOutlined className="user-icon" />
-              <span className="user-name">Admin User</span>
+              <span className="user-name">
+                {loading ? <LoadingOutlined /> : user?.displayName || user?.email }
+              </span>
               <DownOutlined className={`dropdown-arrow ${isDropdownOpen ? 'rotated' : ''}`} />
             </button>
             
