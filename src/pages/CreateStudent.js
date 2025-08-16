@@ -86,6 +86,10 @@ function CreateStudent() {
     }
   };
 
+  const backButton = () => {
+    navigate("/studenttable")
+  }
+
   return (
     <div className="container">
       <div className="h2">Add New Student</div>
@@ -158,15 +162,19 @@ function CreateStudent() {
             <Button
               className="btn btn-primary "
               type="submit"
+              style={{background: "light-green"}}
+
               children={
                 <>
                   {loader && <LoadingOutlined style={{marginRight: 8}} />} Add Student
                 </>
               }
             />
-            <Link to={"/studenttable"} className="btn btn-danger">
-              Back
-            </Link>
+            <Button 
+            onClick={backButton}
+              children={"Back"}
+              style={{background: "red"}}
+            />
           </div>
           <ToastContainer />
         </form>

@@ -10,6 +10,7 @@ import {
   deleteDoc,
 } from "../configuration";
 import { onAuthStateChanged } from "../configuration";
+import Button from "../components/customComponent/uiButtton/button";
 
 function StudentTable() {
   const [students, setStudents] = useState([]);
@@ -66,14 +67,19 @@ function StudentTable() {
     }
   };
 
+  const addNewStudent = () => {
+    router("/student/create")
+  }
+
   return (
     <>
       <div className="container">
         <div className="h2">Student Records</div>
         <div className="table-container">
-          <Link to="/student/create" className="btn btn-add">
-            Add New Student
-          </Link>
+          <Button 
+            onClick={addNewStudent}
+            children={"Add New Student"}
+          />
           <table className="tableData">
             <thead>
               <tr>
@@ -101,26 +107,22 @@ function StudentTable() {
                     <td>{student.place}</td>
                     <td>{student.phone}</td>
                     <td className="actions">
-                      <button
+                      <Button 
                         onClick={() => displayDetails(student.rollNumber)}
-                        className="btn btn-info"
-                      >
-                        {" "}
-                        View{" "}
-                      </button>
-                      <button
+                        children={"View"}
+                        style={{background: "blue",}}
+                      />
+                      <Button 
                         onClick={() => editStudentDetail(student.rollNumber)}
-                        className="btn btn-primary"
-                      >
-                        {" "}
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => deleteStudentDetail(student.id)}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </button>
+                        children={"Edit"}
+                        style={{background: "green",}}
+
+                      />
+                      <Button 
+                        onClick={() => editStudentDetail(student.rollNumber)}
+                        children={"Delete"}
+                        style={{background: "red",}}
+                      />
                     </td>
                   </tr>
                 ))

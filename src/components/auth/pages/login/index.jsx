@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../../configuration";
+import { auth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, browserSessionPersistence, browserLocalPersistence } from "../../../../configuration";
 import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
 import Button from "../../../customComponent/uiButtton/button";
 
@@ -50,15 +49,18 @@ function Login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-    if (users.isChecked) {
-      localStorage.setItem("rememberEmail", users.email);
-      localStorage.setItem("rememberPassword", users.password);
-      localStorage.setItem("isChecked", true);
-    } else {
-      localStorage.removeItem("rememberEmail");
-      localStorage.removeItem("rememberPassword");
-      localStorage.removeItem("isChecked");
-    }
+    await setPersistence(auth, 
+      users.isChecked ? browserLocalPersistence :
+      browserSessionPersistence)
+    // if (users.isChecked) {
+    //   localStorage.setItem("rememberEmail", users.email);
+    //   localStorage.setItem("rememberPassword", users.password);
+    //   localStorage.setItem("isChecked", true);
+    // } else {
+    //   localStorage.removeItem("rememberEmail");
+    //   localStorage.removeItem("rememberPassword");
+    //   localStorage.removeItem("isChecked");
+    // }
     try {
       setIsLoader(true)
       const userCredential = await signInWithEmailAndPassword(
@@ -77,7 +79,6 @@ function Login() {
       setIsLoader(false)
     }
   };
-  // console.log(users)
 
   return (
     <div className="login-container">
