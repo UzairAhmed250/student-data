@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 150px);
     background-color: #eef1f5;
     /* margin: auto ; */
   }
@@ -99,6 +99,11 @@
     margin: 12px 0;
     display: flex;
     justify-content: center;
+  }
+  .bg-color{
+    background: linear-gradient(-120deg, #4285f4, #34a853, #fbbc05, #ea4335);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   

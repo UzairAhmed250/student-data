@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import "../App.css";
-import { Link, useNavigate } from "react-router-dom";
-import { addDoc, collection, db, query, where, getDocs } from "../configuration";
+import { useNavigate } from "react-router-dom";
+import {
+  addDoc,
+  collection,
+  db,
+  query,
+  where,
+  getDocs,
+} from "../configuration";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../components/customComponent/uiButtton/button";
@@ -40,18 +47,21 @@ function CreateStudent() {
       ...userValue,
       [e.target.name]: e.target.value,
     });
-    
+
     // Clear roll number error when user starts typing
-    if (e.target.name === 'rollNumber') {
+    if (e.target.name === "rollNumber") {
       setRollNumberExists(false);
     }
   };
 
   const checkRollNumberExists = async (rollNumber) => {
     try {
-      const q = query(collection(db, "students"), where("rollNumber", "==", rollNumber));
+      const q = query(
+        collection(db, "students"),
+        where("rollNumber", "==", rollNumber)
+      );
       const querySnapshot = await getDocs(q);
-      return !querySnapshot.empty; 
+      return !querySnapshot.empty;
     } catch (error) {
       console.error("Error checking roll number:", error);
       return false;
@@ -61,13 +71,15 @@ function CreateStudent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
-    
+
     try {
       const rollExists = await checkRollNumberExists(userValue.rollNumber);
-      
+
       if (rollExists) {
         setRollNumberExists(true);
-        toast.error("Roll number already exists! Please use a different roll number.");
+        toast.error(
+          "Roll number already exists! Please use a different roll number."
+        );
         setLoader(false);
         return;
       }
@@ -87,8 +99,8 @@ function CreateStudent() {
   };
 
   const backButton = () => {
-    navigate("/studenttable")
-  }
+    navigate("/studenttable");
+  };
 
   return (
     <div className="container">
@@ -162,18 +174,18 @@ function CreateStudent() {
             <Button
               className="btn btn-primary "
               type="submit"
-              style={{background: "light-green"}}
-
+              style={{ background: "light-green" }}
               children={
                 <>
-                  {loader && <LoadingOutlined style={{marginRight: 8}} />} Add Student
+                  {loader && <LoadingOutlined style={{ marginRight: 8 }} />} Add
+                  Student
                 </>
               }
             />
-            <Button 
-            onClick={backButton}
+            <Button
+              onClick={backButton}
               children={"Back"}
-              style={{background: "red"}}
+              style={{ background: "red" }}
             />
           </div>
           <ToastContainer />

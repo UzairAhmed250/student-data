@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "./signup.css";
-import { Link, useNavigate  } from 'react-router-dom';
-// import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 import { auth, sendEmailVerification, createUserWithEmailAndPassword, updateProfile, db, addDoc, collection } from '../../../../configuration';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -52,9 +51,14 @@ try {
     handleCodeInApp: false,
   });
   const storeUsers = await addDoc(collection(db, "users"),{
-    name: user.name,
-    email: user.email,
-    uid: registeredUser.uid
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          phoneNumber: user.phoneNumber || null,
+          photoURL: user.photoURL,
+          creationTime: user.metadata.creationTime,
+          lastSignInTime: user.metadata.lastSignInTime,
+          createdAt: new Date(),
   })
   
   console.log(storeUsers)
